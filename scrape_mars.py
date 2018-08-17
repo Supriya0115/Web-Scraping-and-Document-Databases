@@ -3,6 +3,7 @@ from splinter import Browser
 from bs4 import BeautifulSoup
 import datetime
 import pandas as pd
+import time
 
 # Initialize browser
 def init_browser():
@@ -57,6 +58,7 @@ def scrape():
 
     mars_twitter_url = 'https://twitter.com/MarsWxReport?lang=en'
     browser.visit(mars_twitter_url)
+    time.sleep(10)
 
     # Retrieve page with the browser module, Create BeautifulSoup object; parse with 'html.parser'
 
@@ -72,10 +74,17 @@ def scrape():
     # Web Scraping : Mars Facts 
 
     mars_facts_url = 'https://space-facts.com/mars/'
+    browser.visit(mars_facts_url)
+
     mars_facts_tables = pd.read_html(mars_facts_url)[0]
     mars_facts_tables.columns = ['Attribute','Value']
-    mars_facts_tables_final = mars_facts_tables.to_html('mars_facts_table.html',index=False)
-    mars_data['Facts_Table'] = mars_facts_tables_final
+    
+    #DataFrames as HTML
+    #Save the table directly to a file
+
+    mars_html_table = mars_facts_tables.to_html('mars_facts_table.html',index=False)
+
+    mars_data['Facts_Table'] = mars_html_table
 
     # Web Scraping : Mars Hemispheres
 
@@ -109,6 +118,7 @@ def scrape():
         # create url for each hemisphere image
         image_url = root_image_url + result.find('a',class_='itemLink product-item')['href']
         browser.visit(image_url)
+        time.sleep(10)
         html = browser.html
         soup = BeautifulSoup(html, 'html.parser')
         final_image_url = soup.find('div',class_='downloads').a['href']
@@ -118,6 +128,7 @@ def scrape():
             "image_url" : final_image_url
         }
         hemisphere_image_urls.append(hemisphere_image)
+        browser.back()
 
     mars_data['Hemisphere_Image_urls'] = hemisphere_image_urls
     
@@ -127,8 +138,8 @@ def scrape():
         "News_Title": mars_data['News_Title'],
         "News_Summary" :mars_data['News_Summary'],
         "Featured_Image" : mars_data['Featured_Image_url'],
-        "Weather_Tweet" : mars_data['Weather_Tweet'],
-        "Facts" : mars_facts_tables_final,
+        "Weather_Tweet" : mars_weather_tweet,
+        "Facts" : mars_html_table,
         "Hemisphere_Image_urls": hemisphere_image_urls,
         "Date" : datetime.datetime.utcnow(),
     }

@@ -12,23 +12,91 @@
 <body>
 
     <div class="container">
-        <div class="jumbotron">
-            <h1>Mission to Mars</h1>
-            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+        <div class="jumbotron" style="height:200px; margin-top:15px">
+            <h2 style="text-align: center;"><strong> Mission to Mars </strong></h2>
+            <p style="text-align: center;"><a class="btn btn-primary btn-sm" href="/scrape" role="button"><strong>Scrape New Data</strong></a></p>
 
         </div>
 
-            {% for forecast in forecasts%}
-                    <div class="col-lg-4">
-                            <div class="card" style="width: 20rem;">
-                                <div class="card-body">
-                                  <h4 class="card-title">Costa Rica</h4>
-                                  <h6 class="card-subtitle mb-2 text-muted">{{ forecast.time }} - {{ forecast.name }}: {{ forecast.min_temp }} | {{forecast.max_temp}}</h6>
-                                  <p class="card-text">Surf: {{ forecast.surf_location }} | {{ forecast.height }}</p>
-                                </div>
-                              </div>
-                          </div>
-            {% endfor %}
+        <div class="container-fluid" style="background-color: rgb(238, 241, 240)">
+            <div class="row">                
+                <div class="col-md-12">
+                    <h4 style="color: blue"><strong> Latest Mars News</strong></h4>
+                    <h5><strong>{{mars_mission_data.News_Title}}</strong></h5>
+                    <p><em>{{mars_mission_data.News_Summary}}</em></p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container-fluid" style="background-color: rgb(238, 241, 240)">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 style="color: blue"><strong> Featured Mars Image</strong></h4>
+                    <img src="{{mars_mission_data.Featured_Image}}" class="img-thumbnail">
+                </div>
+                <div class="col-md-6">
+                    <div class="row"> 
+                        <div class="col-md-11" style="border-style:solid;border-color:gainsboro;border-width:2px;border-radius:5px">
+                            <h4 style="color: blue"><strong> Latest Weather Tweet</strong></h4>
+                            <p style="text-align: justify">{{mars_mission_data.Weather_Tweet}}</p>
+                        </div>
+                        <div class="col-md-1"></div>
+            
+                        <div class="col-md-12">
+                            <h4 style="color: blue"><strong>Mars Fact</strong></h4>
+                            <p style="text-align: justify">{{mars_mission_data.Facts}}</p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>     
+
+
+        </div>
+
+        <div class="container-fluid text-center" style="border: 1px solid lightgray;">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 style="color: blue"><strong> Mars Hemispheres</strong></h4>
+                </div>
+                <br>
+            </div>
+
+            <div class="row" style="margin: auto;">
+                
+                    <div class="col-md-6">
+                    <img src="{{mars_mission_data.Hemisphere_Image_urls[0]['image_url']}}" class="img-thumbnail">
+                    <h4 style="color: blue"><strong> {{mars_mission_data.Hemisphere_Image_urls[0]['title']}}</strong></h4>
+                    </div>
+
+                    <div class="col-md-6">
+                    <img src="{{mars_mission_data.Hemisphere_Image_urls[1]['image_url']}}" class="img-thumbnail">
+                    <h4 style="color: blue"><strong> {{mars_mission_data.Hemisphere_Image_urls[1]['title']}}</strong></h4>
+                    </div>
+
+                    <div class="col-md-6">
+                    <img src="{{mars_mission_data.Hemisphere_Image_urls[2]['image_url']}}" class="img-thumbnail">
+                    <h4 style="color: blue"><strong> {{mars_mission_data.Hemisphere_Image_urls[2]['title']}}</strong></h4>
+                    </div>
+        
+                    <div class="col-md-6">
+                    <img src="{{mars_mission_data.Hemisphere_Image_urls[3]['image_url']}}" class="img-thumbnail">
+                    <h4 style="color: blue"><strong> {{mars_mission_data.Hemisphere_Image_urls[3]['title']}}</strong></h4>
+                    </div>
+
+            </div>
+
+    
+            
+
+        </div>
+
+
+
+
 
     </div>
 
