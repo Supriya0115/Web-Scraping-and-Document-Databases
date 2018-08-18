@@ -37,15 +37,15 @@
                 </div>
                 <div class="col-md-6">
                     <div class="row"> 
-                        <div class="col-md-11" style="border-style:solid;border-color:gainsboro;border-width:2px;border-radius:5px">
+                        <div class="col-md-11" style="border-style:solid;border-color:gainsboro;border-width:1px;border-radius:5px">
                             <h4 style="color: blue"><strong> Latest Weather Tweet</strong></h4>
                             <p style="text-align: justify">{{mars_mission_data.Weather_Tweet}}</p>
                         </div>
                         <div class="col-md-1"></div>
             
                         <div class="col-md-12">
-                            <h4 style="color: blue"><strong>Mars Fact</strong></h4>
-                            <p style="text-align: justify">{{mars_mission_data.Facts}}</p>
+                                <h4 style="color: blue"><strong>Mars Fact</strong></h4>
+                                <p>{{mars_mission_data.Facts | safe}}</p>
                         </div>
                     </div>
 
@@ -66,7 +66,7 @@
             </div>
 
             <div class="row" style="margin: auto;">
-                
+
                     <div class="col-md-6">
                     <img src="{{mars_mission_data.Hemisphere_Image_urls[0]['image_url']}}" class="img-thumbnail">
                     <h4 style="color: blue"><strong> {{mars_mission_data.Hemisphere_Image_urls[0]['title']}}</strong></h4>

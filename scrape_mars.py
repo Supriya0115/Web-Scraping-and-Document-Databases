@@ -76,19 +76,18 @@ def scrape():
     mars_facts_url = 'https://space-facts.com/mars/'
     browser.visit(mars_facts_url)
 
-    mars_facts_tables = pd.read_html(mars_facts_url)[0]
-    mars_facts_tables.columns = ['Attribute','Value']
-    
-    #DataFrames as HTML
-    #Save the table directly to a file
+    mars_facts_table = pd.read_html(mars_facts_url)
+    mars_facts_df = pd.DataFrame(mars_facts_table[0])
+    mars_facts_df.columns = ['Attribute','Value']
+    mars_facts_df = mars_facts_df.set_index('Attribute')
 
-    mars_html_table = mars_facts_tables.to_html('mars_facts_table.html',index=False)
+    # Dataframe to HTML Table
+    mars_html_table = mars_facts_df.to_html(classes="mars-facts")
+    # mars_html_table = mars_html.replace('\n', ' ')
 
     mars_data['Facts_Table'] = mars_html_table
-
-    # Web Scraping : Mars Hemispheres
-
-    # URL of page to be scraped
+    
+    # Web Scraping : Mars Hemispheres 
 
     mars_hem_url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
     browser.visit(mars_hem_url)
@@ -143,3 +142,6 @@ def scrape():
         "Hemisphere_Image_urls": hemisphere_image_urls,
         "Date" : datetime.datetime.utcnow(),
     }
+
+
+
