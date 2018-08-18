@@ -82,7 +82,7 @@ def scrape():
     mars_facts_df = mars_facts_df.set_index('Attribute')
 
     # Dataframe to HTML Table
-    mars_html_table = mars_facts_df.to_html(classes="mars-facts")
+    mars_html_table = mars_facts_df.to_html(classes="mars-facts table table-striped")
     # mars_html_table = mars_html.replace('\n', ' ')
 
     mars_data['Facts_Table'] = mars_html_table
