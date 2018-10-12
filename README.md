@@ -1,5 +1,5 @@
 # Web-Scraping-and-Document-Databases
-
+![](Scrape.JPG)
 1. Technology Stack - HTML, CSS, BootStrap, Jupyter, Python
 
 2. Python Libraries - Pandas, Beautiful Soup, Splinter, PyMongo
